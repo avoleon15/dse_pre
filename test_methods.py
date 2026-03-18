@@ -1,41 +1,72 @@
 from LinkedList import LinkedList, Node
 
-# Setup
-ll = LinkedList()
+SONGS = [
+    {"name": "Blinding Lights",         "artist": "The Weeknd",         "album": "After Hours"},
+    {"name": "Bohemian Rhapsody",        "artist": "Queen",              "album": "A Night at the Opera"},
+    {"name": "Stairway to Heaven",       "artist": "Led Zeppelin",       "album": "Led Zeppelin IV"},
+    {"name": "Hotel California",         "artist": "Eagles",             "album": "Hotel California"},
+    {"name": "Smells Like Teen Spirit",  "artist": "Nirvana",            "album": "Nevermind"},
+    {"name": "Shape of You",             "artist": "Ed Sheeran",         "album": "Divide"},
+    {"name": "Lose Yourself",            "artist": "Eminem",             "album": "8 Mile"},
+    {"name": "Billie Jean",              "artist": "Michael Jackson",    "album": "Thriller"},
+    {"name": "Rolling in the Deep",      "artist": "Adele",              "album": "21"},
+    {"name": "Superstition",             "artist": "Stevie Wonder",      "album": "Talking Book"},
+    {"name": "Dreams",                   "artist": "Fleetwood Mac",      "album": "Rumours"},
+    {"name": "Crazy in Love",            "artist": "Beyoncé",            "album": "Dangerously in Love"},
+    {"name": "Mr. Brightside",           "artist": "The Killers",        "album": "Hot Fuss"},
+    {"name": "Redbone",                  "artist": "Childish Gambino",   "album": "Awaken, My Love!"},
+    {"name": "Levitating",               "artist": "Dua Lipa",           "album": "Future Nostalgia"},
+    {"name": "Good as Hell",             "artist": "Lizzo",              "album": "Cuz I Love You"},
+    {"name": "Bad Guy",                  "artist": "Billie Eilish",      "album": "When We All Fall Asleep"},
+    {"name": "Peaches",                  "artist": "Justin Bieber",      "album": "Justice"},
+    {"name": "Stay",                     "artist": "The Kid LAROI",      "album": "F*CK LOVE 3"},
+    {"name": "Montero",                  "artist": "Lil Nas X",          "album": "Montero"},
+    {"name": "drivers license",          "artist": "Olivia Rodrigo",     "album": "SOUR"},
+    {"name": "Watermelon Sugar",         "artist": "Harry Styles",       "album": "Fine Line"},
+    {"name": "Happier Than Ever",        "artist": "Billie Eilish",      "album": "Happier Than Ever"},
+    {"name": "Industry Baby",            "artist": "Lil Nas X",          "album": "Montero"},
+    {"name": "Heat Waves",               "artist": "Glass Animals",      "album": "Dreamland"},
+    {"name": "Shivers",                  "artist": "Ed Sheeran",         "album": "="},
+    {"name": "Permission to Dance",      "artist": "BTS",                "album": "Butter"},
+    {"name": "Easy On Me",               "artist": "Adele",              "album": "30"},
+    {"name": "My Universe",              "artist": "Coldplay",           "album": "Music of the Spheres"},
+    {"name": "Butter",                   "artist": "BTS",                "album": "Butter"},
+    {"name": "Save Your Tears",          "artist": "The Weeknd",         "album": "After Hours"},
+    {"name": "Positions",                "artist": "Ariana Grande",      "album": "Positions"},
+    {"name": "Therefore I Am",           "artist": "Billie Eilish",      "album": "Happier Than Ever"},
+    {"name": "Mood",                     "artist": "24kGoldn",           "album": "El Dorado"},
+    {"name": "Dynamite",                 "artist": "BTS",                "album": "Dynamite"},
+    {"name": "Wrecking Ball",            "artist": "Miley Cyrus",        "album": "Bangerz"},
+    {"name": "Roar",                     "artist": "Katy Perry",         "album": "Prism"},
+    {"name": "Shake It Off",             "artist": "Taylor Swift",       "album": "1989"},
+    {"name": "Blank Space",              "artist": "Taylor Swift",       "album": "1989"},
+    {"name": "Anti-Hero",                "artist": "Taylor Swift",       "album": "Midnights"},
+    {"name": "As It Was",                "artist": "Harry Styles",       "album": "Harry's House"},
+    {"name": "About Damn Time",          "artist": "Lizzo",              "album": "Special"},
+    {"name": "Running Up That Hill",     "artist": "Kate Bush",          "album": "Hounds of Love"},
+    {"name": "Unholy",                   "artist": "Sam Smith",          "album": "Gloria"},
+    {"name": "Flowers",                  "artist": "Miley Cyrus",        "album": "Endless Summer Vacation"},
+    {"name": "Cruel Summer",             "artist": "Taylor Swift",       "album": "Lover"},
+    {"name": "Vampire",                  "artist": "Olivia Rodrigo",     "album": "GUTS"},
+    {"name": "Ella Baila Sola",          "artist": "Eslabon Armado",     "album": "Ella Baila Sola"},
+    {"name": "La Bebe",                  "artist": "Yng Lvcas",          "album": "La Bebe"},
+    {"name": "Quevedo Bzrp Session 52",  "artist": "Bizarrap",           "album": "BZRP Music Sessions"},
+]
 
-song_a = Node(name="Blinding Lights", artist="The Weeknd", album="After Hours")
-song_b = Node(name="Bohemian Rhapsody", artist="Queen", album="A Night at the Opera")
-song_c = Node(name="Stairway to Heaven", artist="Led Zeppelin", album="Led Zeppelin IV")
 
-ll.insert_at_beginning(song_a)
-ll.insert_at_beginning(song_b)
-ll.insert_at_beginning(song_c)
-print(ll)
+def load_playlist(ll: LinkedList) -> None:
+    for song in SONGS:
+        node = Node(name=song["name"], artist=song["artist"], album=song["album"])
+        ll.insert_at_end(node)
 
-# Test insert_at_end
-print("\nTest insert_at_end:")
-song_d = Node(name="Hotel California", artist="Eagles", album="Hotel California")
-ll.insert_at_end(song_d)
-print(ll)
 
-# Test insert_after_node
-print("\nTest insert_after_node:")
-song_x = Node(name="Smells Like Teen Spirit", artist="Nirvana", album="Nevermind")
-ll.insert_after_node(song_x, "Bohemian Rhapsody")
-print(ll)
+def display_playlist(ll: LinkedList) -> None:
+    print(f"\nPlaylist ({len(ll)} songs):\n")
+    for i, node in enumerate(ll, start=1):
+        print(f"  {i:>2}. {node.song_data['name']} — {node.song_data['artist']} ({node.song_data['album']})")
 
-# Test search
-print("\nTest search:")
-result = ll.search("Smells Like Teen Spirit")
-print(f'Search Smells Like Teen Spirit: {result.song_data["name"] if result else "Not found"}')
-result = ll.search("Imagine")
-print(f'Search Imagine: {result.song_data["name"] if result else "Not found"}')
 
-# Test delete_node
-print("\nTest delete_node:")
-ll.delete_node("Smells Like Teen Spirit")
-print(f"After deleting Smells Like Teen Spirit: {ll}")
-ll.delete_node("Stairway to Heaven")
-print(f"After deleting Stairway to Heaven (head): {ll}")
-ll.delete_node("Hotel California")
-print(f"After deleting Hotel California (tail): {ll}")
+if __name__ == "__main__":
+    playlist = LinkedList()
+    load_playlist(playlist)
+    display_playlist(playlist)
